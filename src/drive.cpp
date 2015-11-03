@@ -4,7 +4,6 @@
  *  Contains the menu function and starts the program.
 */
 #include <iostream>
-#include "SLPool.h"
 #include "MempoolCommon.h"
 
 using namespace std;
@@ -48,12 +47,15 @@ int main( int argc, char const *argv[] )
     SLPool pool( 100 );
     x = pool.Allocate( 12);
     cout << x << endl;
+    pool.Free(x);
 
     y = pool.Allocate( 65 );
     cout << y << endl;
+    pool.Free(y);
 
     s = pool.Allocate( 30 );
     cout << s << endl;
+    pool.Free(s);
 
     cout << "Hello world!" << endl;
 
