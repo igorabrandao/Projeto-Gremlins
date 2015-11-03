@@ -12,6 +12,7 @@
 	OBS.........: Part of the LP1/EDB Project.
 
 	LAST UPDATE.: October 27th, 2015.
+	LAST UPDATE.: November 1st, 2015.
 	</PRE>
 */
 
@@ -19,19 +20,25 @@
 #define SLPool_H_
 
 #include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <math.h>
 #include <stdexcept>
+
+/*! Custom classes */
+#include "StoragePool.h"
 
 using namespace std;
 
 // ******************PUBLIC OPERATIONS*********************
-// void * Allocate( size_t )	--> Requests a volume of memory defined by the argument in bytes
+// void * Allocate( size_t )	--> Allocates a volume of memory defined by the argument in bytes
 // void Free( void * )			--> Receive a pointer to the reserved area and free this area to be used later
 
 // ***********************ERRORS****************************
 // std::underflow_error thrown if needed.
 
 /*! SLPool class */
-class SLPool: public StoragePool
+class SLPool : public StoragePool
 {
 	/*!
      * Public section
@@ -41,8 +48,8 @@ class SLPool: public StoragePool
 		/*! Header node */
 		struct Header
 		{
-			unsigned int mui_Lenght;
-			Header() : mui_Lenght(0u) { /* empty */ };
+			unsigned int mui_Length;
+			Header() : mui_Length(0u) { /* empty */ };
 		};
 
 		/*! Block node - inherits from Header node */
@@ -62,26 +69,26 @@ class SLPool: public StoragePool
 		};
 
 	/*!
+     * Public section
+    */
+	public:
+
+		/*! Basic members */
+		explicit SLPool( size_t );	//!< Constructor
+		~SLPool();					//!< Destructor
+
+		void * Allocate( size_t );
+		void Free( void * );
+
+	/*!
      * Private section
     */
 	private:
 
 		/*! Private attributes */
 		unsigned int mui_NumberOfBlocks;
-		Block *mp_Pool;		//!< Head of the list
-		Block *mp_Pool;		//!< End of the list
-
-	/*!
-     * Public section
-    */
-	public:
-
-		/*! Basic members */
-		explicit SLPool( size_t );	/*!< Constructor */
-		~SLPool();					/*!< Destructor */
-
-		void * Allocate( size_t );
-		void Free( void * );
+		Block *mp_Pool;			//!< Head of the list
+		Block *mr_Sentinel;		//!< End of the list
 
 };
 

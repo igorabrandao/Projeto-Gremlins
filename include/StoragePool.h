@@ -12,6 +12,7 @@
 	OBS.........: Part of the LP1/EDB Project.
 
 	LAST UPDATE.: October 27th, 2015.
+	LAST UPDATE.: November 1st, 2015.
 	</PRE>
 */
 
@@ -44,20 +45,9 @@ class StoragePool
 	public:
 
 		/*! Functions */
-		virtual ~StoragePool();					/*!< Virtual destructor */
+		virtual ~StoragePool();	/*!< Virtual destructor */
 		virtual void* Allocate( size_t ) = 0;
 		virtual void Free( void * ) = 0;
-
-		/*! Basic members */
-
-	/*!
-     * Private section
-    */
-	private:
-
-		/*! Attributes */
-
-		/*! Disable copy constructor */
 };
 
 #endif

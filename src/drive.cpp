@@ -4,20 +4,21 @@
  *  Contains the menu function and starts the program.
 */
 #include <iostream>
-#include "StoragePool.h"
+#include "SLPool.h"
+#include "MempoolCommon.h"
 
 using namespace std;
 
 int main( int argc, char const *argv[] )
 {
 	/*! Create an instance from Storage Pool class */
-	StoragePool p;
+	//StoragePool p;
 
 	/*! Allocates 100 bytes of memory */
-	void *ptr = p.Allocate(100);
+	//void *ptr = p.Allocate(100);
 
 	/*! Free the memory */
-	p.Free(ptr);
+	//p.Free(ptr);
 
 	/*
 		StoragePool p, q;
@@ -35,6 +36,26 @@ int main( int argc, char const *argv[] )
 		delete ptr1 ;
 		delete ptr2 ;
 	*/
+
+	void* x;
+    void* y;
+    void* s;
+
+    /*cout << x << endl;
+    cout << y << endl;
+    cout << s << endl;*/
+
+    SLPool pool( 100 );
+    x = pool.Allocate( 12);
+    cout << x << endl;
+
+    y = pool.Allocate( 65 );
+    cout << y << endl;
+
+    s = pool.Allocate( 30 );
+    cout << s << endl;
+
+    cout << "Hello world!" << endl;
 
 	/*! Main return */
 	return 0;
