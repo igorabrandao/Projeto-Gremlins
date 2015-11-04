@@ -19,9 +19,6 @@
 #ifndef StoragePool_H_
 #define StoragePool_H_
 
-#include <iostream>
-#include <stdexcept>
-
 /*! Custom classes */
 #include "MempoolCommon.h"
 

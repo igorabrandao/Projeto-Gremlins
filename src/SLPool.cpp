@@ -11,11 +11,9 @@
 ***********************************************/
 SLPool::SLPool( size_t bytes )
 {
-    double leop = bytes + sizeof (Header);
-	double riop = sizeof (Block);
-	double op = leop/riop;
-
-	mui_NumberOfBlocks = ceil(op);
+	/*! Calculate the minimum number of blocks */
+	double aux_blocks = ( (bytes + sizeof(Header)) / sizeof(Block) );
+	mui_NumberOfBlocks = ceil(aux_blocks);
 	cout << mui_NumberOfBlocks << endl;
 
 	Block *aux = new Block[ mui_NumberOfBlocks+1 ];
@@ -45,10 +43,9 @@ SLPool::~SLPool()
 void * 
 SLPool::Allocate( size_t bytes )
 {
-    double leop= bytes + sizeof (Header);
-	double riop=sizeof (Block);
-	double op=leop/riop;
-    unsigned int N_Blocks =ceil(op);
+	/*! Calculate the minimum number of blocks */
+	double aux_blocks = ( (bytes + sizeof(Header)) / sizeof(Block) );
+    unsigned int N_Blocks = ceil(aux_blocks);
     cout << "N blocks " << N_Blocks << endl;
 
     Block * aux;

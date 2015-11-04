@@ -1,5 +1,5 @@
 #
-# Makefile build 'Bares project' using Make
+# Makefile build 'Gremlins project' using Make
 #
 
 SOURCES = $(wildcard src/*.cpp)
@@ -9,7 +9,7 @@ CFLAGS  = -c -g -Wall -std=c++11
 
 INC_DIR = ./include
 BIN_DIR = ./bin
-APP     = $(BIN_DIR)/bares
+APP     = $(BIN_DIR)/gremlins
 LIB_DIR = 
 LIBS = 
 
@@ -32,6 +32,3 @@ exe:
 
 val:
 	valgrind $(APP)
-
-queue:
-	g++ -Wall -g src/drive_queue.cpp -I include -o bin/queue

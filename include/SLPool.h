@@ -20,6 +20,7 @@
 #define SLPool_H_
 
 #include <iostream>
+#include <new>
 #include <cstdlib>
 #include <cmath>
 #include <math.h>

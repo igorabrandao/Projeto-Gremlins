@@ -19,7 +19,6 @@
 #ifndef MempoolCommon_H_
 #define MempoolCommon_H_
 
-#include <iostream>
 #include "SLPool.h"
 
 using namespace std;
@@ -37,7 +36,7 @@ class MempoolCommon
 	public:
 
 		/*! Tag node */
-		struct Tag { StoragePool * pool; };
+		//struct Tag { StoragePool * pool; };
 
 		/*! Basic members */
 
@@ -60,19 +59,19 @@ class MempoolCommon
 		}*/
 
 		/*! Delete */
-		void operator delete ( void * arg ) noexcept
-		{
+		/*void operator delete ( void * arg ) noexcept
+		{*/
 			/*! We need subtract 1U (in fact, pointer arithmetics), because
 			 * arg points to the raw data (second block of information).
 			 * The pool id (tag) is located 'sizeof(Tag)' bytes before.
 			*/
-			Tag * const tag = reinterpret_cast <Tag *>(arg) - 1U;
+			/*Tag * const tag = reinterpret_cast <Tag *>(arg) - 1U;
 
 			if ( nullptr != tag->pool ) //!< Memory block belongs to a particular GM
 				tag->pool->Free(tag);
 			else
 				std::free(tag); //!< Memory block belongs to the operational system
-		}
+		}*/
 
 	/*!
      * Private section
