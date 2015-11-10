@@ -80,6 +80,7 @@ class SLPool : public StoragePool
 
 		void * Allocate( size_t );
 		void Free( void * );
+		void Debug();
 
 	/*!
      * Private section
@@ -89,7 +90,7 @@ class SLPool : public StoragePool
 		/*! Private attributes */
 		unsigned int mui_NumberOfBlocks;
 		Block *mp_Pool;			//!< Head of the list
-		Block *mr_Sentinel;		//!< End of the list
+		Block *mr_Sentinel;		//!< Points to the free area begining 
 
 };
 

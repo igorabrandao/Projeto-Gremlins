@@ -1,63 +1,69 @@
 /*! \file */ 
-/*! \brief Class main.cpp.
+/*! \brief main.cpp.
  *
  *  Contains the menu function and starts the program.
 */
 #include <iostream>
+#include "SLPool.h"
 #include "MempoolCommon.h"
 
 using namespace std;
 
 int main( int argc, char const *argv[] )
 {
+	/********************************************//**
+	* Test with new overload
+	***********************************************/
+
 	/*! Create an instance from Storage Pool class */
-	//StoragePool p;
+	/*SLPool p(200);
+	SLPool q(300);
 
-	/*! Allocates 100 bytes of memory */
-	//void *ptr = p.Allocate(100);
+	// Instanciando ’ptr0’ diretamente com o Sistema Operacional
+	int * ptr0 = new int(100) ;
 
-	/*! Free the memory */
-	//p.Free(ptr);
+	// Instanciando ’T’ no GM ’p ’.
+	int * ptr1 = new (p) int;
 
-	/*
-		StoragePool p, q;
+	// Instanciando ’T’ no GM ’q ’.
+	int * ptr2 = new (q) int;
 
-		// Instanciando ’T’ diretamente com o Sistema Operacional
-		T * ptr0 = new T;
+	delete ptr0;
+	delete ptr1;
+	delete ptr2;*/
 
-		// Instanciando ’T’ no GM ’p ’.
-		T * ptr1 = new (p ) T;
-
-		// Instanciando ’T’ no GM ’q ’.
-		T * ptr2 = new (q ) T;
-
-		delete ptr0 ;
-		delete ptr1 ;
-		delete ptr2 ;
-	*/
+	/********************************************//**
+	* Test without new overload
+	***********************************************/
 
 	void* x;
     void* y;
     void* s;
 
-    /*cout << x << endl;
-    cout << y << endl;
-    cout << s << endl;*/
-
     SLPool pool( 100 );
-    x = pool.Allocate( 12);
-    cout << x << endl;
-    pool.Free(x);
+    pool.Debug();
+    x = pool.Allocate(25);
 
-    y = pool.Allocate( 65 );
-    cout << y << endl;
-    pool.Free(y);
+    pool.Debug();
+    cout << "<<< X: " << x << " >>> " << endl;
+    //delete x;
 
-    s = pool.Allocate( 30 );
-    cout << s << endl;
-    pool.Free(s);
+    int * z = new (pool) int;
+    pool.Debug();
+    cout << "<<< Z: " << z << " >>> " << endl;
+    //delete z;
 
-    cout << "Hello world!" << endl;
+    y = pool.Allocate(25);
+    pool.Debug();
+    cout << "<<< Y: " << y << " >>> " << endl;
+    //delete y;
+
+    s = pool.Allocate(15);
+    pool.Debug();
+    cout << "<<< S: " << s << " >>> " << endl;
+    //delete s;
+
+    cout << "<<< Finish with success! >>>" << endl;
 
 	/*! Main return */
 	return 0;

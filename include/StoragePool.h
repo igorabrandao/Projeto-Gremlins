@@ -20,18 +20,13 @@
 #define StoragePool_H_
 
 /*! Custom classes */
-#include "MempoolCommon.h"
+//#include "MempoolCommon.h"
 
 using namespace std;
 
 // ******************PUBLIC OPERATIONS*********************
-// queue<string> infixToPostfix( _exp )			--> Convert infix to postfix expressions
-// int hasPriority( _exp1, _exp2 )				--> Check wich operator has a higher precedence
-// int isRightAssociative( _operator )			--> Check whether an operator is right associative
-// int getOperatorPrecedence( _operator )		--> Get the operator precedence
-
-// ***********************ERRORS****************************
-// std::underflow_error thrown if needed.
+// void * Allocate( size_t )	--> Allocates a volume of memory defined by the argument in bytes
+// void Free( void * )			--> Receive a pointer to the reserved area and free this area to be used later
 
 /*! StoragePool class */
 class StoragePool
@@ -42,7 +37,7 @@ class StoragePool
 	public:
 
 		/*! Functions */
-		virtual ~StoragePool();	/*!< Virtual destructor */
+		virtual ~StoragePool(){};	/*!< Virtual destructor */
 		virtual void* Allocate( size_t ) = 0;
 		virtual void Free( void * ) = 0;
 };
