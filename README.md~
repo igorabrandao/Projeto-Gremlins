@@ -20,7 +20,8 @@ assim:\n
 ### LISTA DE CLASSES ###
 As classes utilizadas pelo programa são as seguintes:
 
-**StoragePool.h** => Provê a definição geral dos métodos Allocate() e Free().\n
-**SLPool.h** => Implementa de fatos os métodos Allocate() e Free().\n\n
+**StoragePool.h** => Provê a definição geral dos métodos Allocate() e Free().
+
+**SLPool.h** => Implementa de fatos os métodos Allocate() e Free().
 
 Além disso, também criou-se um arquivo **MempoolCommon.h** para que as definições dos operadores "new" e "delete" sejam sobrescritas.
