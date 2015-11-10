@@ -146,6 +146,7 @@ void
 SLPool::Free( void * p )
 {
 	/*! Pointer to the reserved area  */
+	p -= sizeof(Header);
     Block * ptReserved = (Block*)p;
 
     /*! Pointer to the previous reserved area  */
@@ -155,42 +156,63 @@ SLPool::Free( void * p )
     Block * ptPostReserved = mr_Sentinel->mp_Next;
 
     /*! Check if the reserved area is inside of memory pool */
-    if ( ptReserved < &mp_Pool[0] || ptReserved > &mp_Pool[mui_NumberOfBlocks - 1] )
+    if ( ptReserved < &mp_Pool[0] || ptReserved > &mp_Pool[(mui_NumberOfBlocks - 1)] )
     {
     	/*! Out of range */
         cout << "<<< Invalid reference! >>>" << endl;
         return;
     }
 
-    /*! Check if the block is full */
+    /*! Check if the pool is full */
     if ( mr_Sentinel->mp_Next == nullptr )
     {
+    	/*! Reconect to the free block of the list */
     	mr_Sentinel->mp_Next = ptReserved;
-    	ptReserved->mp_Next = nullptr;
+
+    	/*! Remove the reference to the new free block */
     	p = nullptr;
     	return;
     }
    	else
     {
-	    while ( ptPostReserved < ptReserved && ptPostReserved != nullptr )
+    	/*! Run through free area list */
+	    while ( ptPostReserved != nullptr && ptPostReserved < ptReserved )
 	    {
+	    	/*! The ptPostReserved needs to be after the ptReserved */
 	    	ptPostReserved = ptPostReserved->mp_Next;
+
+	    	/*! The ptPrevReserved needs to be before the ptReserved */
 	    	ptPrevReserved = ptPrevReserved->mp_Next;
 	    }
 
+	    /*! 1) The previous and the next area are free 
+		 *  Check if the next area minus the block size is
+		 *  equal to the actual area (pointer arithmetics).
+	    */
 	   	if ( ( ptPostReserved - ptReserved->mui_Length ) == ptReserved )
 	   	{
+	   		/*! Combine the 3 areas in a single one */
 	   		ptReserved->mp_Next = ptPostReserved->mp_Next;
 
+	   		/*! Combine the nodes in ptReserved and sum the areas */
 	   		ptReserved->mui_Length += ptPostReserved->mui_Length;
+
+	   		/*! Isolates the ptPostReserved pointer */
 	   		ptPostReserved->mui_Length = 0;
 	   		ptPostReserved->mp_Next = nullptr;
 	    }
+	    /*! 2) Add the free area to the list without merging the others
+		 *  The previous and next area are reserved.
+	    */
 	    else
 	    {
             ptReserved->mp_Next = ptPostReserved;
         }
 
+        /*! 3) The previous area is reserved and the next one is free 
+		 *  Check if the previous area plus the block size is
+		 *  equal to the actual area (pointer arithmetics).
+	    */
 	    if ( ( ptPrevReserved + ptPrevReserved->mui_Length ) == ptReserved )
 	    {
 	    	ptPrevReserved->mp_Next = ptReserved->mp_Next;
@@ -198,6 +220,9 @@ SLPool::Free( void * p )
 	    	ptPrevReserved->mui_Length += ptReserved->mui_Length;
 	    	ptReserved->mui_Length = 0;
 	    }
+	    /*! 4) The previous area is free and the next one is reserved 
+		 *  Combine the actual with the previous one.
+	    */
 	    else
 	    {
             ptPrevReserved->mp_Next = ptReserved;
@@ -212,8 +237,6 @@ SLPool::Debug()
     Block *test[ mui_NumberOfBlocks ];
     Block *aux = mr_Sentinel->mp_Next;
     cout << "aux: " << aux << endl;
-    //cout<<"aux-mui_Length: "<<aux->mui_Length<<endl;
-
 
     int nb[ mui_NumberOfBlocks ];
     int i = 0;

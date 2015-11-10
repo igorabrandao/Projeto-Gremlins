@@ -33,8 +33,6 @@ void * operator new ( size_t bytes, StoragePool & p )
 	Tag* const tag = reinterpret_cast <Tag *>( p.Allocate(bytes + sizeof(Tag)) );
 	tag->pool = &p;
 
-	std::cout << " New overloaded: " << endl;
-
 	return tag + 1U; //!< skip sizeof tag to get the raw data-block
 }
 
@@ -43,8 +41,6 @@ void * operator new ( size_t bytes )
 {
 	Tag* const tag = reinterpret_cast <Tag *>( std::malloc(bytes + sizeof(Tag)) );
 	tag->pool = nullptr;
-
-	std::cout << " New regular: " << endl;
 
 	return ( reinterpret_cast <void *>(tag + 1U) );
 }
