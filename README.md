@@ -24,4 +24,8 @@ As classes utilizadas pelo programa são as seguintes:
 
 **SLPool.h** => Implementa de fatos os métodos Allocate() e Free().
 
+**Event.h** => Manipula o timeStamp e o memoryPtr para ser usado na priority_queue.
+
+**SLPoolTester.h** => Implementa o método StoragePoolTest() para testar a eficiência dos métodos do gerenciador de memória.
+
 Além disso, também criou-se um arquivo **MempoolCommon.h** para que as definições dos operadores "new" e "delete" sejam sobrescritas.

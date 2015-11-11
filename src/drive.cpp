@@ -6,50 +6,45 @@
 #include <iostream>
 #include "SLPool.h"
 #include "MempoolCommon.h"
+#include "SLPoolTester.h"
 
 using namespace std;
 
 int main( int argc, char const *argv[] )
 {
+    void * x;
+    SLPoolTester slPoolTest;
+    SLPool pool(2000);
+
 	/********************************************//**
-	* Test without new overload
+	* Testing
 	***********************************************/
+    for ( auto i(1); i < 5; ++i )
+    {
+        cout << endl << "------------------[TESTE " << i << "]----------------" << endl;
+        cout << "<<< S.O >>>" << endl << endl;
 
-	void * x;
-    void * y;
+        cout << "Allocate..." << endl;
+        x = pool.Allocate(slPoolTest.getRandomForSize(100, 2000));
+        pool.Debug();
 
-    cout << endl << "--------------------[CONSTRUCTOR]-------------------" << endl;
-    SLPool pool( 100 );
-    pool.Debug();
-    cout << "----------------------------------------------------" << endl << endl;
+        cout << "Free..." << endl;
+        pool.Free(x);
+        pool.Debug();
 
-    cout << "------------------[WITHOUT OVERLOAD]----------------" << endl;
-    x = pool.Allocate(25);
-    pool.Debug();
-    cout << "<<< X: " << x << " >>> " << endl;
-    pool.Free(x);
-    pool.Debug();
-    cout << "----------------------------------------------------" << endl;
+        cout << "<<< MEU TESTE >>>" << endl << endl;
 
-    cout << "----------------------------------------------------" << endl;
-    y = pool.Allocate(25);
-    pool.Debug();
-    cout << "<<< Y: " << y << " >>> " << endl;
-    pool.Free(y);
-    pool.Debug();
-    cout << "----------------------------------------------------" << endl << endl;
+        int * z = new (pool) int;
+        cout << "Allocate..." << endl;
+        //z = pool.Allocate(slPoolTest.getRandomForSize(100, 2000));
+        pool.Debug();
 
-    /********************************************//**
-	* Test with new overload
-	***********************************************/
+        cout << "Free..." << endl;
+        delete z;
+        pool.Debug();
 
-    cout << "-------------------[WITH OVERLOAD]------------------" << endl;
-    int * z = new (pool) int;
-    pool.Debug();
-    cout << "<<< Z: " << z << " >>> " << endl;
-    delete z;
-    pool.Debug();
-    cout << "----------------------------------------------------" << endl << endl;
+        cout << "-----------------------------------------------------" << endl << endl;
+    }
 
     cout << "<<< Finish with success! >>>" << endl;
 

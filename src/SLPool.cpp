@@ -1,5 +1,5 @@
 /*! \file */ 
-/*! \brief SLPool.inl.
+/*! \brief SLPool.cpp.
  *
  *  Implements the functions from SLPool class.
 */
@@ -14,8 +14,6 @@ SLPool::SLPool( size_t bytes )
 	/*! Calculate the minimum number of blocks */
 	double aux_blocks = ( (double)(bytes + sizeof(Header)) / (double)sizeof(Block) );
 	mui_NumberOfBlocks = ceil(aux_blocks);
-	cout << "<<< Number of blocks: " << mui_NumberOfBlocks << " >>>" << endl;
-	cout << "<<< Sizeof of blocks: " << sizeof(Block) << " >>>" << endl;
 
 	/*! Create the new block */
 	Block * newBlock = new Block[(mui_NumberOfBlocks + 1)];
@@ -57,7 +55,8 @@ SLPool::Allocate( size_t bytes )
 
 	/*! Round to above ceil(math.h) */
     unsigned int N_Blocks = ceil(aux_blocks);
-    cout << "<<< N blocks: " << N_Blocks << " >>>" << endl;
+    cout << "<<< Number of blocks:\t " << N_Blocks << " >>>" << endl;
+    cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl;
 
     /*! Pointer to the block */
     Block * newBlock;
@@ -67,8 +66,7 @@ SLPool::Allocate( size_t bytes )
     newBlock = mr_Sentinel->mp_Next; // Keeps the header
     newBlock2 = mr_Sentinel;
 
-    /*! Check if the sentinel points to a block */
-    if ( mr_Sentinel->mp_Next != nullptr )
+    try
     {
     	/*! Run through the free area list and check if it has enough space */
 	    while ( newBlock->mui_Length < N_Blocks && newBlock->mp_Next != nullptr )
@@ -91,7 +89,6 @@ SLPool::Allocate( size_t bytes )
 	    	/*! Return the raw area */
 	    	return ( space_pointer );
 	    }
-
 	    /*! 2º) Check if the area is bigger than necessary */
 	    else if ( newBlock->mui_Length > N_Blocks )
 	    {
@@ -123,19 +120,20 @@ SLPool::Allocate( size_t bytes )
 	    	/*! Return the raw area */
 	    	return ( space_pointer );
 	    }
-
 	    /*! 3º) Check if the area is smaller than necessary */
 	    else
 	    {
 	    	/*! throws not enough space exception */
-	    	cout << "<<< There ins't enough space to be allocated! >>>" << endl;
+	    	//throw std::bad_alloc();
+	    	cout << "<<< Insufficient space to be allocated! >>>" << endl;
 	    }
     }
-    else
-    {
-    	// throws bad alloc exception (it's full)
-    	return nullptr;
-    }
+    catch ( std::bad_alloc& ba )
+	{
+		// throws bad alloc exception (it's full)
+		std::cerr << "<<< bad_alloc caught: " << ba.what() << " >>>" << '\n';
+		return nullptr;
+	}
 }
 
 /********************************************//**
@@ -230,37 +228,43 @@ SLPool::Free( void * p )
 	}
 }
 
+/********************************************//**
+* Print the block list
+***********************************************/
 void
 SLPool::Debug()
 {
-	cout << endl;
-    Block *test[ mui_NumberOfBlocks ];
-    Block *aux = mr_Sentinel->mp_Next;
-    cout << "aux: " << aux << endl;
+	cout << "***************[MEMORY SITUATION]*****************" << endl;
 
-    int nb[ mui_NumberOfBlocks ];
-    int i = 0;
+    Block * block_print = mr_Sentinel->mp_Next;
+    cout << "<<< Block position: " << block_print << endl;
+    cout << "<<< Block situation: ";
+
     int j = 0;
 
-    cout << endl;
-    for( unsigned int lok( 0 ); lok < mui_NumberOfBlocks;lok++ ){
-        if( &mp_Pool[ lok ]== aux )
+    /*! Run through the block list */
+    for ( unsigned int i(0); i < mui_NumberOfBlocks; ++i )
+    {
+    	/*! Check if it's the first block */
+        if ( &mp_Pool[i] == block_print )
         {
             j = 0;
-            for( unsigned int k = 0;k < mp_Pool[ lok ].mui_Length; k++ )
+
+            for ( unsigned int k = 0;k < mp_Pool[i].mui_Length; k++ )
             {
                 cout << "0" << " ";
             	j++;
             }
-            lok = lok + j - 1;
-            aux = aux->mp_Next;
+
+            i = i + j - 1;
+            block_print = block_print->mp_Next;
         }
-        
         else
         {
         	cout << "*" << " ";
         }
     }
-    cout << endl;
+
+    cout << endl << "**************************************************" << endl << endl;
     return;
 }

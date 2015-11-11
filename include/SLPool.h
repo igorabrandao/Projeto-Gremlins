@@ -34,9 +34,10 @@ using namespace std;
 // ******************PUBLIC OPERATIONS*********************
 // void * Allocate( size_t )	--> Allocates a volume of memory defined by the argument in bytes
 // void Free( void * )			--> Receive a pointer to the reserved area and free this area to be used later
+// void Debug()					--> Print the block list
 
 // ***********************ERRORS****************************
-// std::underflow_error thrown if needed.
+// std::bad_alloc thrown if needed.
 
 /*! SLPool class */
 class SLPool : public StoragePool
