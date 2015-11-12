@@ -105,29 +105,32 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// void StoragePoolTest( const StoragePool, time_t )    --&gt; Test the SLPool efficiency</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// size_t getRandomForSize( int, int )                  --&gt; Generate a randomic memory size</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// time_t getRandomTimeInterval( int, int )             --&gt; Generate a randomic time interval</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="../../dc/de1/classSLPoolTester.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/de1/classSLPoolTester.html">SLPoolTester</a></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> StoragePoolTest( <a class="code" href="../../da/da7/classStoragePool.html">StoragePool</a> &amp; _pool, time_t );</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">size_t</span> getRandomForSize( <span class="keywordtype">int</span>, <span class="keywordtype">int</span> ) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        time_t getRandomTimeInterval( <span class="keywordtype">int</span>, <span class="keywordtype">int</span> ) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/* --------------------- [ End of the SLPoolTester.h header ] ------------------- */</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/* ========================================================================= */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// double getTickCount()                                --&gt; Counts the time interval</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="../../dc/de1/classSLPoolTester.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../dc/de1/classSLPoolTester.html">SLPoolTester</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span> StoragePoolTest( <a class="code" href="../../da/da7/classStoragePool.html">StoragePool</a> &amp; _pool, time_t );</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">size_t</span> getRandomForSize( <span class="keywordtype">int</span>, <span class="keywordtype">int</span> ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        time_t getRandomTimeInterval( <span class="keywordtype">int</span>, <span class="keywordtype">int</span> ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">double</span> getTickCount();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/* --------------------- [ End of the SLPoolTester.h header ] ------------------- */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/* ========================================================================= */</span></div>
 <div class="ttc" id="StoragePool_8h_html"><div class="ttname"><a href="../../d7/d21/StoragePool_8h.html">StoragePool.h</a></div></div>
 <div class="ttc" id="classStoragePool_html"><div class="ttname"><a href="../../da/da7/classStoragePool.html">StoragePool</a></div><div class="ttdef"><b>Definition:</b> StoragePool.h:32</div></div>
 <div class="ttc" id="Event_8h_html"><div class="ttname"><a href="../../d6/d8d/Event_8h.html">Event.h</a></div></div>
-<div class="ttc" id="classSLPoolTester_html"><div class="ttname"><a href="../../dc/de1/classSLPoolTester.html">SLPoolTester</a></div><div class="ttdef"><b>Definition:</b> SLPoolTester.h:39</div></div>
+<div class="ttc" id="classSLPoolTester_html"><div class="ttname"><a href="../../dc/de1/classSLPoolTester.html">SLPoolTester</a></div><div class="ttdef"><b>Definition:</b> SLPoolTester.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 10 2015 23:16:37 for Gremlins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 11 2015 23:38:14 for Gremlins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -62,7 +62,7 @@ class Compare
     */
 	public:
 
-	    bool operator() (Event _a, Event _b) const
+	    bool operator() (Event & _a, Event & _b) const
 	    {
 	    	if ( _a.getTimeStamp() < _b.getTimeStamp() )
 	        	return true;

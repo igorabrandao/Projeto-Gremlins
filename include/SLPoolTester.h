@@ -34,6 +34,7 @@ using namespace std;
 // void StoragePoolTest( const StoragePool, time_t ) 	--> Test the SLPool efficiency
 // size_t getRandomForSize( int, int ) 					--> Generate a randomic memory size
 // time_t getRandomTimeInterval( int, int ) 			--> Generate a randomic time interval
+// double getTickCount() 								--> Counts the time interval
 
 /*! SLPoolTester class */
 class SLPoolTester
@@ -47,6 +48,8 @@ class SLPoolTester
 		void StoragePoolTest( StoragePool & _pool, time_t );
 		size_t getRandomForSize( int, int ) const;
 		time_t getRandomTimeInterval( int, int ) const;
+
+		double getTickCount();
 
 };
 

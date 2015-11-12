@@ -55,8 +55,10 @@ SLPool::Allocate( size_t bytes )
 
 	/*! Round to above ceil(math.h) */
     unsigned int N_Blocks = ceil(aux_blocks);
-    cout << "<<< Number of blocks:\t " << N_Blocks << " >>>" << endl;
-    cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl;
+
+    //cout << "<<< Allocating... >>>" << endl;
+    //cout << "<<< Number of blocks:\t " << N_Blocks << " >>>" << endl;
+    //cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl;
 
     /*! Pointer to the block */
     Block * newBlock;
@@ -66,8 +68,9 @@ SLPool::Allocate( size_t bytes )
     newBlock = mr_Sentinel->mp_Next; // Keeps the header
     newBlock2 = mr_Sentinel;
 
-    try
-    {
+	/*! Check if the sentinel points to a block */
+	if ( mr_Sentinel->mp_Next != nullptr )
+	{
     	/*! Run through the free area list and check if it has enough space */
 	    while ( newBlock->mui_Length < N_Blocks && newBlock->mp_Next != nullptr )
 	    {
@@ -126,14 +129,15 @@ SLPool::Allocate( size_t bytes )
 	    	/*! throws not enough space exception */
 	    	//throw std::bad_alloc();
 	    	cout << "<<< Insufficient space to be allocated! >>>" << endl;
+	    	return nullptr;
 	    }
     }
-    catch ( std::bad_alloc& ba )
-	{
-		// throws bad alloc exception (it's full)
-		std::cerr << "<<< bad_alloc caught: " << ba.what() << " >>>" << '\n';
+    else
+    {
+		//throw std::bad_alloc();
+		cout << "<<< Insufficient space to be allocated! >>>" << endl;
 		return nullptr;
-	}
+    }
 }
 
 /********************************************//**
@@ -143,6 +147,8 @@ SLPool::Allocate( size_t bytes )
 void
 SLPool::Free( void * p )
 {
+	//cout << "<<< Deleting... >>>" << endl;
+
 	/*! Pointer to the reserved area  */
 	p -= sizeof(Header);
     Block * ptReserved = (Block*)p;
@@ -237,8 +243,8 @@ SLPool::Debug()
 	cout << "***************[MEMORY SITUATION]*****************" << endl;
 
     Block * block_print = mr_Sentinel->mp_Next;
-    cout << "<<< Block position: " << block_print << endl;
-    cout << "<<< Block situation: ";
+    //cout << "<<< Block position:\t " << block_print << endl;
+    //cout << "<<< Block situation:\t ";
 
     int j = 0;
 
@@ -252,7 +258,7 @@ SLPool::Debug()
 
             for ( unsigned int k = 0;k < mp_Pool[i].mui_Length; k++ )
             {
-                cout << "0" << " ";
+                cout << "| 0" << " ";
             	j++;
             }
 
@@ -261,10 +267,10 @@ SLPool::Debug()
         }
         else
         {
-        	cout << "*" << " ";
+        	cout << "| *" << " ";
         }
     }
 
-    cout << endl << "**************************************************" << endl << endl;
+    cout << "|" << endl << "**************************************************" << endl << endl;
     return;
 }

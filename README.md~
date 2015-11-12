@@ -29,3 +29,9 @@ As classes utilizadas pelo programa são as seguintes:
 **SLPoolTester.h** => Implementa o método StoragePoolTest() para testar a eficiência dos métodos do gerenciador de memória.
 
 Além disso, também criou-se um arquivo **MempoolCommon.h** para que as definições dos operadores "new" e "delete" sejam sobrescritas.
+
+### PROBLEMAS ###
+A classe de teste SLPoolTester.h apesar de estar implementada com a priority_queue e com Event, apresenta erros de Segmentation Fault,
+os quais ainda não conseguimos resolver, portanto colocamos um arquivo de drive para teste.
+
+O arquivo drive que chama a classe de teste se encontra na raiz com o nome drive2.cpp.
