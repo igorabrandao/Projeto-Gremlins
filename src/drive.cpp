@@ -254,6 +254,8 @@ void menu()
                 {
                     simpleTest(100, (50 * i));
                 }
+
+                cout << endl << "<<< Output files generated with success >>> " << endl;
                 break;
 
             /*! Advanced test */
