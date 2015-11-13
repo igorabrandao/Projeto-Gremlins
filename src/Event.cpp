@@ -9,16 +9,6 @@
 /********************************************//**
 * constructor
 ***********************************************/
-Event::Event()
-{
-	/*! Initialize the attributes with defafult */
-	e_adress = nullptr;
-	e_time = 10;
-}
-
-/********************************************//**
-* constructor overload
-***********************************************/
 Event::Event( void * _adress, time_t _time )
 {
 	/*! Initialize the attributes with parameters */
@@ -31,14 +21,14 @@ Event::Event( void * _adress, time_t _time )
 ***********************************************/
 Event::~Event()
 {
-	//delete[] e_adress;
+	//delete e_adress;
 }
 
 /********************************************//**
 * Return the timeStamp
 ***********************************************/
 time_t
-Event::getTimeStamp() const
+Event::getTimeStamp()
 {
 	return e_time;
 }
@@ -47,7 +37,7 @@ Event::getTimeStamp() const
 * Return the memoryPointer
 ***********************************************/
 void*
-Event::getMemoryPtr() const
+Event::getMemoryPtr()
 {
 	return e_adress;
 }

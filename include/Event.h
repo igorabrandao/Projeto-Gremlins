@@ -37,12 +37,11 @@ class Event
 	public:
 
 		/*! Basic members */
-		explicit Event( void *, time_t );
-		explicit Event();
+		explicit Event( void* _adress = nullptr, time_t _time = 10 );
 		virtual ~Event();
 
-		time_t getTimeStamp() const;
-		void * getMemoryPtr() const;
+		time_t getTimeStamp();
+		void * getMemoryPtr();
 
 	/*!
      * Private section

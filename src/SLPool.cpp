@@ -7,13 +7,17 @@
 #include "SLPool.h"
 
 /********************************************//**
-* constructor
+* constructor SLPool
 ***********************************************/
 SLPool::SLPool( size_t bytes )
 {
 	/*! Calculate the minimum number of blocks */
 	double aux_blocks = ( (double)(bytes + sizeof(Header)) / (double)sizeof(Block) );
 	mui_NumberOfBlocks = ceil(aux_blocks);
+
+	//cout << "<<< Creating new Memory Pool... >>>" << endl;
+    //cout << "<<< Number of blocks:\t " << mui_NumberOfBlocks << " >>>" << endl;
+    //cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl << endl << endl;
 
 	/*! Create the new block */
 	Block * newBlock = new Block[(mui_NumberOfBlocks + 1)];
@@ -36,6 +40,22 @@ SLPool::SLPool( size_t bytes )
 }
 
 /********************************************//**
+* constructor SLPoolFF
+***********************************************/
+SLPoolFF::SLPoolFF( size_t bytes ) : SLPool(bytes)
+{
+	/*! Call base class constructor */
+}
+
+/********************************************//**
+* constructor SLPoolBF
+***********************************************/
+SLPoolBF::SLPoolBF( size_t bytes ) : SLPool(bytes)
+{
+	/*! Call base class constructor */
+}
+
+/********************************************//**
 * destructor
 ***********************************************/
 SLPool::~SLPool()
@@ -45,10 +65,10 @@ SLPool::~SLPool()
 
 /********************************************//**
 * Allocates a volume of memory defined by 
-* the argument in bytes.
+* the argument in bytes (First-Fit).
 ***********************************************/
 void * 
-SLPool::Allocate( size_t bytes )
+SLPoolFF::Allocate( size_t bytes )
 {
 	/*! Calculate the minimum number of blocks */
 	double aux_blocks = ( (double)(bytes + sizeof(Header)) / (double)sizeof(Block) );
@@ -56,9 +76,9 @@ SLPool::Allocate( size_t bytes )
 	/*! Round to above ceil(math.h) */
     unsigned int N_Blocks = ceil(aux_blocks);
 
-    //cout << "<<< Allocating... >>>" << endl;
-    //cout << "<<< Number of blocks:\t " << N_Blocks << " >>>" << endl;
-    //cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl;
+    cout << "<<< Allocating... >>>" << endl;
+    cout << "<<< Number of blocks:\t " << N_Blocks << " >>>" << endl;
+    cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl;
 
     /*! Pointer to the block */
     Block * newBlock;
@@ -108,16 +128,20 @@ SLPool::Allocate( size_t bytes )
 	    	newBlock3->mui_Length = N_Blocks;
 
 	    	/*! The next free area header receives the next next one */
-	    	newBlock->mp_Next = newBlock3->mp_Next;
-
-	    	/*! Isolates the reserved area */
-	    	newBlock3->mp_Next = nullptr;
-
-	    	/*! Reconect the previous area with the next free one */
+	    	//newBlock->mp_Next = newBlock3->mp_Next;
 	    	newBlock2->mp_Next = newBlock;
 
+	    	newBlock->mp_Next = newBlock3->mp_Next;
+	    	/*! Isolates the reserved area */
+	    	//newBlock3->mp_Next = nullptr;
+
+	    	/*! Reconect the previous area with the next free one */
+	    	//newBlock2->mp_Next = newBlock;
+	    	newBlock -= N_Blocks;
+	    	newBlock->mp_Next = nullptr;
+
 	    	/*! Pointer to jump the header and return the raw area */
-	    	void * space_pointer = newBlock3;
+	    	void * space_pointer = newBlock;
 	    	space_pointer += sizeof(Header);
 
 	    	/*! Return the raw area */
@@ -126,17 +150,156 @@ SLPool::Allocate( size_t bytes )
 	    /*! 3º) Check if the area is smaller than necessary */
 	    else
 	    {
-	    	/*! throws not enough space exception */
-	    	//throw std::bad_alloc();
-	    	cout << "<<< Insufficient space to be allocated! >>>" << endl;
-	    	return nullptr;
+	    	/*! throws bad_alloc exception */
+	    	cout << endl << "<<< Insufficient space to be allocated! >>>" << endl << endl;
+	    	throw std::bad_alloc();
+	    	//return nullptr;
 	    }
     }
     else
     {
-		//throw std::bad_alloc();
-		cout << "<<< Insufficient space to be allocated! >>>" << endl;
-		return nullptr;
+		/*! throws bad_alloc exception */
+    	cout << endl << "<<< Insufficient space to be allocated! >>>" << endl << endl;
+    	throw std::bad_alloc();
+    	//return nullptr;
+    }
+}
+
+/********************************************//**
+* Allocates a volume of memory defined by 
+* the argument in bytes (First-Fit).
+***********************************************/
+void * 
+SLPoolBF::Allocate( size_t bytes )
+{
+	/*! Variables */
+	int diff = 0; //!< store the difference between N_Blocks and free area size
+	int occurrence = 0;
+
+	/*! Calculate the minimum number of blocks */
+	double aux_blocks = ( (double)(bytes + sizeof(Header)) / (double)sizeof(Block) );
+
+	/*! Round to above ceil(math.h) */
+    unsigned int N_Blocks = ceil(aux_blocks);
+
+    cout << "<<< Allocating... >>>" << endl;
+    cout << "<<< Number of blocks:\t " << N_Blocks << " >>>" << endl;
+    cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl;
+
+    /*! Pointer to the block */
+    Block * newBlock;
+    Block * newBlock2;
+    Block * newBlock_bestfit;
+
+    /*! Receive the block's head */
+    newBlock = mr_Sentinel->mp_Next; // Keeps the header
+    newBlock2 = mr_Sentinel;
+    newBlock_bestfit = mr_Sentinel;
+
+	/*! Check if the sentinel points to a block */
+	if ( mr_Sentinel->mp_Next != nullptr )
+	{
+    	/*! Run through the free area list and check if it has enough space */
+	    while ( newBlock->mp_Next != nullptr )
+	    {
+	    	diff = (newBlock->mui_Length - N_Blocks);
+
+	    	/*! Check if the area fits exactly */
+			if ( diff == 0 )
+			{
+				/*! The previous pointer jumps toward the "normal" one */
+		    	newBlock2->mp_Next = newBlock->mp_Next;
+		    	newBlock->mp_Next = nullptr;
+
+		    	/*! Pointer to jump the header and return the raw area */
+		    	void * space_pointer = newBlock;
+		    	space_pointer += sizeof(Header);
+
+		    	/*! Return the raw area */
+		    	return ( space_pointer );
+			}
+			/*! Check if the area is bigger than necessary */
+			else if ( diff > 0 )
+			{
+				if ( occurrence != 0 )
+				{
+					if ( diff < (newBlock_bestfit->mp_Next->mui_Length - N_Blocks) )
+					{
+						newBlock_bestfit = newBlock2;
+					}
+				}
+				else
+				{
+					/*! First occurence */
+					newBlock_bestfit = newBlock2;
+				}
+
+				occurrence += 1;
+			}
+			/*! Check if the area is smaller than necessary */
+			else
+			{
+				/*newBlock = newBlock->mp_Next;
+	    		newBlock2 = newBlock2->mp_Next;*/
+			}
+
+	    	newBlock = newBlock->mp_Next;
+	    	newBlock2 = newBlock2->mp_Next;
+
+	    } // End while
+
+	    newBlock = newBlock_bestfit;
+	    newBlock = newBlock->mp_Next;
+	    newBlock2 = newBlock_bestfit;
+
+ 		if ( newBlock->mui_Length > N_Blocks )
+	    {
+	    	/*! Save the actually reserved area */
+	    	Block * newBlock3 = newBlock;
+
+	    	/*! Jump N_Blocks ahead (next free area) */
+	    	newBlock += N_Blocks;
+
+	    	/*! Define the next free area length */
+	    	newBlock->mui_Length = (newBlock3->mui_Length - N_Blocks);
+
+	    	/*! Update the reserved area length */
+	    	newBlock3->mui_Length = N_Blocks;
+
+	    	/*! The next free area header receives the next next one */
+	    	//newBlock->mp_Next = newBlock3->mp_Next;
+	    	newBlock2->mp_Next = newBlock;
+
+	    	newBlock->mp_Next = newBlock3->mp_Next;
+	    	/*! Isolates the reserved area */
+	    	//newBlock3->mp_Next = nullptr;
+
+	    	/*! Reconect the previous area with the next free one */
+	    	//newBlock2->mp_Next = newBlock;
+	    	newBlock -= N_Blocks;
+	    	newBlock->mp_Next = nullptr;
+
+	    	/*! Pointer to jump the header and return the raw area */
+	    	void * space_pointer = newBlock;
+	    	space_pointer += sizeof(Header);
+
+	    	/*! Return the raw area */
+	    	return ( space_pointer );
+	    }
+		else
+	    {
+	    	/*! throws bad_alloc exception */
+	    	cout << endl << "<<< Insufficient space to be allocated! >>>" << endl << endl;
+	    	throw std::bad_alloc();
+	    	//return nullptr;
+	    }
+    }
+    else
+    {
+		/*! throws bad_alloc exception */
+    	cout << endl << "<<< Insufficient space to be allocated! >>>" << endl << endl;
+    	throw std::bad_alloc();
+    	//return nullptr;
     }
 }
 
@@ -147,7 +310,7 @@ SLPool::Allocate( size_t bytes )
 void
 SLPool::Free( void * p )
 {
-	//cout << "<<< Deleting... >>>" << endl;
+	cout << "<<< Deleting... >>>" << endl;
 
 	/*! Pointer to the reserved area  */
 	p -= sizeof(Header);
@@ -256,7 +419,7 @@ SLPool::Debug()
         {
             j = 0;
 
-            for ( unsigned int k = 0;k < mp_Pool[i].mui_Length; k++ )
+            for ( unsigned int k = 0; k < mp_Pool[i].mui_Length; k++ )
             {
                 cout << "| 0" << " ";
             	j++;

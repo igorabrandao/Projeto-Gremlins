@@ -36,6 +36,14 @@ void * operator new ( size_t bytes, StoragePool & p )
 	return tag + 1U; //!< skip sizeof tag to get the raw data-block
 }
 
+void * operator new[] ( size_t bytes, StoragePool & p )
+{
+	Tag* const tag = reinterpret_cast <Tag *>( p.Allocate(bytes + sizeof(Tag)) );
+	tag->pool = &p;
+
+	return tag + 1U; //!< skip sizeof tag to get the raw data-block
+}
+
 /*! Regular new */
 void * operator new ( size_t bytes )
 {

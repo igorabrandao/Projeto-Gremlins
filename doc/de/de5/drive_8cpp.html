@@ -94,19 +94,44 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <code>#include &quot;<a class="el" href="../../dc/d13/SLPool_8h_source.html">SLPool.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="../../d4/d3d/MempoolCommon_8h_source.html">MempoolCommon.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="../../d2/ddb/SLPoolTester_8h_source.html">SLPoolTester.h</a>&quot;</code><br/>
+<code>#include &lt;fstream&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;cstring&gt;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a9ef3c0c12174fb9649aa8f673b7f3142"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#a9ef3c0c12174fb9649aa8f673b7f3142">return_to_menu</a> ()</td></tr>
 <tr class="separator:a9ef3c0c12174fb9649aa8f673b7f3142"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf2425162b7081c2f2c2441341bffc0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#acf2425162b7081c2f2c2441341bffc0c">simpleTest</a> (unsigned int n_instances)</td></tr>
-<tr class="separator:acf2425162b7081c2f2c2441341bffc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c203161748c521e14a8a1cc1cb504df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#a1c203161748c521e14a8a1cc1cb504df">saveFile</a> (string _filename, string _content)</td></tr>
+<tr class="separator:a1c203161748c521e14a8a1cc1cb504df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bcf9fa19880c694b9cc5cec602d9780"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#a0bcf9fa19880c694b9cc5cec602d9780">simpleTest</a> (unsigned int n_instances, size_t bytes)</td></tr>
+<tr class="separator:a0bcf9fa19880c694b9cc5cec602d9780"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3807f71a6d81396e7d6aa8fd893e965"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#aa3807f71a6d81396e7d6aa8fd893e965">advancedTest</a> (time_t _time)</td></tr>
+<tr class="separator:aa3807f71a6d81396e7d6aa8fd893e965"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a0e843767aeea4f433a28b9c54f573a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#a2a0e843767aeea4f433a28b9c54f573a">menu</a> ()</td></tr>
 <tr class="separator:a2a0e843767aeea4f433a28b9c54f573a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/de5/drive_8cpp.html#abf9e6b7e6f15df4b525a2e7705ba3089">main</a> (int argc, char const *argv[])</td></tr>
 <tr class="separator:abf9e6b7e6f15df4b525a2e7705ba3089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aa3807f71a6d81396e7d6aa8fd893e965"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void advancedTest </td>
+          <td>(</td>
+          <td class="paramtype">time_t&#160;</td>
+          <td class="paramname"><em>_time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Run an advanced test from Test class </p>
+<p>Instance from <a class="el" href="../../dc/de1/classSLPoolTester.html">SLPoolTester</a> </p>
+
+</div>
+</div>
 <a class="anchor" id="abf9e6b7e6f15df4b525a2e7705ba3089"></a>
 <div class="memitem">
 <div class="memproto">
@@ -130,6 +155,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Main </p>
 <p>Call menu function</p>
 <p>Main return </p>
 
@@ -153,7 +179,7 @@ Functions</h2></td></tr>
 <p>&lt; invalid option</p>
 <p>Check the option</p>
 <p>Simple test</p>
-<p>Simple test and log file (batch)</p>
+<p>Advanced test</p>
 <p>Exit </p>
 
 </div>
@@ -174,7 +200,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="acf2425162b7081c2f2c2441341bffc0c"></a>
+<a class="anchor" id="a1c203161748c521e14a8a1cc1cb504df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void saveFile </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>_filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>_content</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Save the output file </p>
+
+</div>
+</div>
+<a class="anchor" id="a0bcf9fa19880c694b9cc5cec602d9780"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -182,24 +235,39 @@ Functions</h2></td></tr>
           <td class="memname">void simpleTest </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>n_instances</em></td><td>)</td>
+          <td class="paramname"><em>n_instances</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Run a simple test of GM </p>
 <p>Instance of test class</p>
 <p>Running a simple test</p>
-<p>Info</p>
-<p>Sistema operacional (SO)</p>
-<p>Gerenciador de memória (GM) </p>
+<p>Print the time</p>
+<p>Save the time in the output file</p>
+<p>Running a simple test</p>
+<p>Print the time</p>
+<p>Save the time in the output file</p>
+<p>Running a simple test</p>
+<p>Print the time</p>
+<p>Save the time in the output file </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 11 2015 23:38:14 for Gremlins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 12 2015 22:40:09 for Gremlins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -94,9 +94,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a611807ef566f55af28bbb38990839cac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/de1/classSLPoolTester.html#a611807ef566f55af28bbb38990839cac">StoragePoolTest</a> (<a class="el" href="../../da/da7/classStoragePool.html">StoragePool</a> &amp;_pool, time_t)</td></tr>
-<tr class="memdesc:a611807ef566f55af28bbb38990839cac"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d5/d45/SLPoolTester_8cpp.html">SLPoolTester.cpp</a>.  <a href="#a611807ef566f55af28bbb38990839cac">More...</a><br/></td></tr>
-<tr class="separator:a611807ef566f55af28bbb38990839cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb7fb5342d3ba525af5ce344ca8bd13e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/de1/classSLPoolTester.html#abb7fb5342d3ba525af5ce344ca8bd13e">StoragePoolTest</a> (<a class="el" href="../../db/d0c/classSLPool.html">SLPool</a> &amp;_pool, time_t)</td></tr>
+<tr class="memdesc:abb7fb5342d3ba525af5ce344ca8bd13e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d5/d45/SLPoolTester_8cpp.html">SLPoolTester.cpp</a>.  <a href="#abb7fb5342d3ba525af5ce344ca8bd13e">More...</a><br/></td></tr>
+<tr class="separator:abb7fb5342d3ba525af5ce344ca8bd13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a538e3333b05e4f0ede3bf478c039ca73"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/de1/classSLPoolTester.html#a538e3333b05e4f0ede3bf478c039ca73">getRandomForSize</a> (int, int) const </td></tr>
 <tr class="separator:a538e3333b05e4f0ede3bf478c039ca73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbb9435f5d7f94263c98050a298b8a7b"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/de1/classSLPoolTester.html#adbb9435f5d7f94263c98050a298b8a7b">getRandomTimeInterval</a> (int, int) const </td></tr>
@@ -177,14 +177,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a611807ef566f55af28bbb38990839cac"></a>
+<a class="anchor" id="abb7fb5342d3ba525af5ce344ca8bd13e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void SLPoolTester::StoragePoolTest </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../da/da7/classStoragePool.html">StoragePool</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="../../db/d0c/classSLPool.html">SLPool</a> &amp;&#160;</td>
           <td class="paramname"><em>_pool</em>, </td>
         </tr>
         <tr>
@@ -205,6 +205,12 @@ Public Member Functions</h2></td></tr>
 <p>Public section</p>
 <p>Basic members</p>
 <p>Implements the functions from <a class="el" href="../../dc/de1/classSLPoolTester.html">SLPoolTester</a> class. Test the <a class="el" href="../../db/d0c/classSLPool.html">SLPool</a> efficiency. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_pool</td><td>- </td></tr>
+  </table>
+  </dd>
+</dl>
 <p>Run while we have events pending or time to run.</p>
 <ul>
 <li>Access the event with the smallest time - stamp .</li>
@@ -212,7 +218,8 @@ Public Member Functions</h2></td></tr>
 <li>When we got here, the top event has run out of time .</li>
 </ul>
 <p>*&lt; Remove event from priority queue .</p>
-<p>*&lt; Calling free operator .</p>
+<p>*&lt; Calling free operator.</p>
+<p>Initialize random seed:</p>
 <p>*&lt; Set time stamp some time from now.</p>
 <p>*&lt; Creating a new simulation event. </p>
 
@@ -225,7 +232,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 11 2015 23:38:14 for Gremlins by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 12 2015 22:40:10 for Gremlins by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

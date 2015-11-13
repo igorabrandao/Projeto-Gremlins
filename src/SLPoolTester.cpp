@@ -8,9 +8,10 @@
 
 /********************************************//**
 * Test the SLPool efficiency.
+* @param _pool - 
 ***********************************************/
 void
-SLPoolTester::StoragePoolTest( StoragePool & _pool, time_t _timeLimit ) 
+SLPoolTester::StoragePoolTest( SLPool & _pool, time_t _timeLimit ) 
 {
 	// [1] Setup random numbers generator for memory size, say [100, 2000] bytes.
 	// [2] Setup random numbers generator for time intervals, say [1, 100] units.
@@ -23,20 +24,31 @@ SLPoolTester::StoragePoolTest( StoragePool & _pool, time_t _timeLimit )
 	// Run simulation fot the time set by the client .
 	for ( time_t t(0); t < _timeLimit; ++t )
 	{
+		cout << "xxx Empty: " << pq.empty() << " xxx" << endl;
+
 		/*! Run while we have events pending or time to run. */
 		while ( !pq.empty() )
 		{
 			//!* Access the event with the smallest time - stamp .
 			Event ev = pq.top();
 
+			cout << "xxx TimeStamp: " << ev.getTimeStamp() << " > " << t << " xxx" << endl;
+
 			//!* Still some time left ....
 			if ( ev.getTimeStamp() > t ) break;
 
 			//!* When we got here, the top event has run out of time .
 			pq.pop(); //!*< Remove event from priority queue .
-			_pool.Free( ev.getMemoryPtr() ); //!*< Calling free operator .
+
+			cout << endl << "Deletando... " << ev.getMemoryPtr() << endl << endl;
+			_pool.Free( ev.getMemoryPtr() ); //!*< Calling free operator.
 			//delete ev;
+
+			_pool.Debug();
 		}
+
+		/*! Initialize random seed: */
+        srand (time(NULL));
 
 		auto memSize = getRandomForSize(100, 2000);
 		void * const add = _pool.Allocate(memSize);
@@ -48,11 +60,14 @@ SLPoolTester::StoragePoolTest( StoragePool & _pool, time_t _timeLimit )
 		cout << "xxx memSize: " << memSize << " xxx" << endl;
 		cout << "xxx releaseTime: " << releaseTime << " xxx" << endl << endl;
 
-		Event ev2(add, releaseTime);
-		pq.push( ev2 ); //!*< Creating a new simulation event.
+		if ( add != nullptr )
+		{
+			Event ev2(add, releaseTime);
+			pq.push( ev2 ); //!*< Creating a new simulation event.
+		}
 
 		// Here you might want to show the memory map on the screen ,
-		//_pool.Debug();
+		_pool.Debug();
 
 		// or write it to a log file, for debugging purpose.
 	}

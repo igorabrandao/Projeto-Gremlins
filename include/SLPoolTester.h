@@ -26,6 +26,7 @@
 
 /*! Custom classes */
 #include "StoragePool.h"
+#include "SLPool.h"
 #include "Event.h"
 
 using namespace std;
@@ -45,7 +46,7 @@ class SLPoolTester
 	public:
 
 		/*! Basic members */
-		void StoragePoolTest( StoragePool & _pool, time_t );
+		void StoragePoolTest( SLPool & _pool, time_t );
 		size_t getRandomForSize( int, int ) const;
 		time_t getRandomTimeInterval( int, int ) const;
 

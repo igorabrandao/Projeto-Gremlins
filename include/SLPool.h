@@ -13,6 +13,7 @@
 
 	LAST UPDATE.: October 27th, 2015.
 	LAST UPDATE.: November 1st, 2015.
+	LAST UPDATE.: November 12th, 2015.
 	</PRE>
 */
 
@@ -79,19 +80,51 @@ class SLPool : public StoragePool
 		explicit SLPool( size_t );	//!< Constructor
 		~SLPool();					//!< Destructor
 
-		void * Allocate( size_t );
+		virtual void* Allocate( size_t ) = 0;
 		void Free( void * );
 		void Debug();
 
 	/*!
-     * Private section
+     * Protected section
     */
-	private:
+	protected:
 
 		/*! Private attributes */
 		unsigned int mui_NumberOfBlocks;
 		Block *mp_Pool;			//!< Head of the list
 		Block *mr_Sentinel;		//!< Points to the free area begining 
+
+};
+
+/*! SLPool first fit class */
+class SLPoolFF : public SLPool
+{
+	/*!
+     * Public section
+    */
+	public:
+
+		/*! Basic members */
+		explicit SLPoolFF( size_t );		//!< Constructor
+		~SLPoolFF(){};						//!< Destructor
+
+		void * Allocate( size_t );
+
+};
+
+/*! SLPool best fit class */
+class SLPoolBF : public SLPool
+{
+	/*!
+     * Public section
+    */
+	public:
+
+		/*! Basic members */
+		explicit SLPoolBF( size_t );	//!< Constructor
+		~SLPoolBF(){};					//!< Destructor
+
+		void * Allocate( size_t );
 
 };
 
