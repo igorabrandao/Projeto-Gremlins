@@ -24,15 +24,11 @@ SLPoolTester::StoragePoolTest( SLPool & _pool, time_t _timeLimit )
 	// Run simulation fot the time set by the client .
 	for ( time_t t(0); t < _timeLimit; ++t )
 	{
-		cout << "xxx Empty: " << pq.empty() << " xxx" << endl;
-
 		/*! Run while we have events pending or time to run. */
 		while ( !pq.empty() )
-		{
+		{			
 			//!* Access the event with the smallest time - stamp .
 			Event ev = pq.top();
-
-			cout << "xxx TimeStamp: " << ev.getTimeStamp() << " > " << t << " xxx" << endl;
 
 			//!* Still some time left ....
 			if ( ev.getTimeStamp() > t ) break;
@@ -40,7 +36,7 @@ SLPoolTester::StoragePoolTest( SLPool & _pool, time_t _timeLimit )
 			//!* When we got here, the top event has run out of time .
 			pq.pop(); //!*< Remove event from priority queue .
 
-			cout << endl << "Deletando... " << ev.getMemoryPtr() << endl << endl;
+			cout << endl << "<<< Deleting... " << ev.getMemoryPtr() << " >>>" << endl << endl;
 			_pool.Free( ev.getMemoryPtr() ); //!*< Calling free operator.
 			//delete ev;
 
@@ -50,10 +46,10 @@ SLPoolTester::StoragePoolTest( SLPool & _pool, time_t _timeLimit )
 		/*! Initialize random seed: */
         srand (time(NULL));
 
-		auto memSize = getRandomForSize(100, 2000);
+		auto memSize = getRandomForSize(10, 100);
 		void * const add = _pool.Allocate(memSize);
 
-		auto elapsedTime = getRandomTimeInterval(1, 100);
+		auto elapsedTime = getRandomTimeInterval(1, 5);
 		time_t releaseTime = t + elapsedTime; //!*< Set time stamp some time from now.
 
 		cout << "xxx memAddress: " << add << " xxx" << endl;

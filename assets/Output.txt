@@ -1,0 +1,119 @@
+
+----------------------------------------------
+<<< Sistema operacional (SO) >>>
+----------------------------------------------
+
+
+----------------------------------------------
+
+----------------------------------------------
+<<< Memory Manager (GM) - First Fit >>>
+----------------------------------------------
+
+Interval GM FF = 28.064280 ms
+Interval GM FF = 1.547331 ms
+Interval GM FF = 1.795171 ms
+Interval GM FF = 19.586753 ms
+Interval GM FF = 9.270962 ms
+Interval GM FF = 0.737802 ms
+Interval GM FF = 20.462507 ms
+Interval GM FF = 8.868274 ms
+Interval GM FF = 0.805223 ms
+Interval GM FF = 28.139834 ms
+Interval GM FF = 0.639240 ms
+Interval GM FF = 23.741521 ms
+Interval GM FF = 0.630327 ms
+Interval GM FF = 7.313563 ms
+Interval GM FF = 21.819642 ms
+Interval GM FF = 8.214575 ms
+Interval GM FF = 0.694016 ms
+Interval GM FF = 21.599957 ms
+Interval GM FF = 7.689269 ms
+Interval GM FF = 0.714025 ms
+Interval GM FF = 30.044344 ms
+Interval GM FF = 0.716074 ms
+Interval GM FF = 22.790439 ms
+Interval GM FF = 0.636406 ms
+Interval GM FF = 7.588288 ms
+Interval GM FF = 0.724163 ms
+Interval GM FF = 21.422232 ms
+Interval GM FF = 7.690749 ms
+Interval GM FF = 0.631365 ms
+Interval GM FF = 29.477900 ms
+Interval GM FF = 0.721802 ms
+Interval GM FF = 22.832893 ms
+Interval GM FF = 8.382251 ms
+Interval GM FF = 0.559976 ms
+Interval GM FF = 30.270651 ms
+Interval GM FF = 0.458402 ms
+Interval GM FF = 22.160786 ms
+Interval GM FF = 1.241237 ms
+Interval GM FF = 8.921401 ms
+Interval GM FF = 1.740666 ms
+Interval GM FF = 26.281630 ms
+Interval GM FF = 0.627031 ms
+Interval GM FF = 0.625972 ms
+Interval GM FF = 29.553455 ms
+Interval GM FF = 0.729730 ms
+Interval GM FF = 0.794975 ms
+Interval GM FF = 21.822603 ms
+Interval GM FF = 7.594130 ms
+Interval GM FF = 23.333495 ms
+Interval GM FF = 0.638778 ms
+Interval GM FF = 29.832638 ms
+Interval GM FF = 0.727922 ms
+Interval GM FF = 6.689636 ms
+Interval GM FF = 0.803076 ms
+Interval GM FF = 22.611432 ms
+Interval GM FF = 6.713243 ms
+Interval GM FF = 0.766782 ms
+Interval GM FF = 30.099011 ms
+Interval GM FF = 0.715717 ms
+Interval GM FF = 23.726591 ms
+Interval GM FF = 0.627178 ms
+Interval GM FF = 7.920029 ms
+Interval GM FF = 1.981221 ms
+Interval GM FF = 21.333171 ms
+Interval GM FF = 6.376159 ms
+Interval GM FF = 1.458054 ms
+Interval GM FF = 30.386744 ms
+Interval GM FF = 2.013744 ms
+Interval GM FF = 1.972027 ms
+Interval GM FF = 27.329382 ms
+Interval GM FF = 1.903621 ms
+Interval GM FF = 27.053481 ms
+Interval GM FF = 1.565117 ms
+Interval GM FF = 1.606227 ms
+Interval GM FF = 26.443484 ms
+Interval GM FF = 1.741189 ms
+Interval GM FF = 1.785826 ms
+Interval GM FF = 28.029687 ms
+Interval GM FF = 1.722048 ms
+Interval GM FF = 1.771316 ms
+Interval GM FF = 28.526898 ms
+Interval GM FF = 1.708601 ms
+Interval GM FF = 1.784423 ms
+Interval GM FF = 27.958675 ms
+Interval GM FF = 1.980879 ms
+Interval GM FF = 1.970056 ms
+Interval GM FF = 25.855793 ms
+Interval GM FF = 2.024337 ms
+Interval GM FF = 28.096773 ms
+Interval GM FF = 0.742571 ms
+Interval GM FF = 21.926086 ms
+Interval GM FF = 0.631455 ms
+Interval GM FF = 7.177773 ms
+Interval GM FF = 0.672872 ms
+Interval GM FF = 22.600234 ms
+Interval GM FF = 6.581435 ms
+Interval GM FF = 0.647292 ms
+Interval GM FF = 30.129533 ms
+Interval GM FF = 0.659080 ms
+Interval GM FF = 23.674387 ms
+
+----------------------------------------------
+
+----------------------------------------------
+<<< Memory Manager (GM) - Best Fit >>>
+----------------------------------------------
+

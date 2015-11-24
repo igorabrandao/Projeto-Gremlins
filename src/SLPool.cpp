@@ -15,9 +15,9 @@ SLPool::SLPool( size_t bytes )
 	double aux_blocks = ( (double)(bytes + sizeof(Header)) / (double)sizeof(Block) );
 	mui_NumberOfBlocks = ceil(aux_blocks);
 
-	//cout << "<<< Creating new Memory Pool... >>>" << endl;
-    //cout << "<<< Number of blocks:\t " << mui_NumberOfBlocks << " >>>" << endl;
-    //cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl << endl << endl;
+	cout << "<<< Creating new Memory Pool... >>>" << endl;
+    cout << "<<< Number of blocks:\t " << mui_NumberOfBlocks << " >>>" << endl;
+    cout << "<<< Blocks sizeof:\t " << sizeof(Block) << " >>>" << endl << endl << endl;
 
 	/*! Create the new block */
 	Block * newBlock = new Block[(mui_NumberOfBlocks + 1)];
@@ -33,7 +33,7 @@ SLPool::SLPool( size_t bytes )
 	mp_Pool->mp_Next = nullptr;
 
 	/*! Define the sentinel as the last block of the memory */
-	mr_Sentinel = &mp_Pool[(mui_NumberOfBlocks + 1)];
+	mr_Sentinel = &mp_Pool[mui_NumberOfBlocks];
 
 	/*! Points the sentinel next node to the begin */
 	mr_Sentinel->mp_Next = mp_Pool;
@@ -152,16 +152,16 @@ SLPoolFF::Allocate( size_t bytes )
 	    {
 	    	/*! throws bad_alloc exception */
 	    	cout << endl << "<<< Insufficient space to be allocated! >>>" << endl << endl;
-	    	throw std::bad_alloc();
-	    	//return nullptr;
+	    	//throw std::bad_alloc();
+	    	return nullptr;
 	    }
     }
     else
     {
 		/*! throws bad_alloc exception */
     	cout << endl << "<<< Insufficient space to be allocated! >>>" << endl << endl;
-    	throw std::bad_alloc();
-    	//return nullptr;
+    	//throw std::bad_alloc();
+    	return nullptr;
     }
 }
 
@@ -310,8 +310,6 @@ SLPoolBF::Allocate( size_t bytes )
 void
 SLPool::Free( void * p )
 {
-	cout << "<<< Deleting... >>>" << endl;
-
 	/*! Pointer to the reserved area  */
 	p -= sizeof(Header);
     Block * ptReserved = (Block*)p;
@@ -398,42 +396,149 @@ SLPool::Free( void * p )
 }
 
 /********************************************//**
-* Print the block list
+* Print the block list (debug)
+* AUTHORS: José Carlos and Heraclito César
 ***********************************************/
 void
 SLPool::Debug()
 {
 	cout << "***************[MEMORY SITUATION]*****************" << endl;
 
-    Block * block_print = mr_Sentinel->mp_Next;
-    //cout << "<<< Block position:\t " << block_print << endl;
-    //cout << "<<< Block situation:\t ";
+    Block * test[mui_NumberOfBlocks];
+    Block* aux=mr_Sentinel->mp_Next;
 
-    int j = 0;
+    Block *aux2 = mr_Sentinel->mp_Next;
+    Block* aux3 =mr_Sentinel->mp_Next;
 
-    /*! Run through the block list */
-    for ( unsigned int i(0); i < mui_NumberOfBlocks; ++i )
+    int nb=mui_NumberOfBlocks/20;
+    int dec=mui_NumberOfBlocks%20;
+    int mb=mui_NumberOfBlocks/6;
+    int mdec=mui_NumberOfBlocks%6;
+
+    int i=0;
+    int j=0;
+    int k=0;
+    int h=0;
+
+    int lop;
+    int lop2;
+    
+    int cs=0;
+    int lk=0;
+
+    char preenchido[mui_NumberOfBlocks];
+    
+    int livre=0;
+
+    for ( lop=0; lop <mui_NumberOfBlocks; lop++)
     {
-    	/*! Check if it's the first block */
-        if ( &mp_Pool[i] == block_print )
+        if ( &mp_Pool[lop] == aux2 )
         {
-            j = 0;
-
-            for ( unsigned int k = 0; k < mp_Pool[i].mui_Length; k++ )
+            for ( lop2 = 0; lop2 < aux2->mui_Length; lop2++ )
             {
-                cout << "| 0" << " ";
-            	j++;
+                preenchido[lop] = ' ';
+                lop++;
             }
+            lop--;
 
-            i = i + j - 1;
-            block_print = block_print->mp_Next;
+            aux2=aux2->mp_Next;
         }
         else
         {
-        	cout << "| *" << " ";
+            preenchido[lop]='-';
         }
     }
 
-    cout << "|" << endl << "**************************************************" << endl << endl;
+    for ( unsigned int lok( 0 ); lok <= nb; lok++)
+    {
+		for (; k < lok * 20; k++)
+		{
+			cout << mp_Pool[ k ].mui_Length << " ";
+		}
+
+		cout<<endl;
+
+		for (; h < lok*20; h++ )
+		{
+			int ts = mp_Pool[h].mui_Length;
+
+			cs = Casas(ts);
+
+			if ( cs > 1 )
+			{
+				for ( lk = 0; lk < cs; lk++ )
+				{
+					cout << preenchido[ h ];
+				}
+
+                    cout<<" ";
+                }
+                else
+                {
+                    cout << preenchido[ h ]<<" ";
+                }
+            }
+            cout << endl;
+    }
+
+    i=0;
+    j=0;
+    k=0;
+    h=0;
+    lk=0;
+
+    for( k = nb*20; k < mui_NumberOfBlocks; k++ )
+    {
+		cout << mp_Pool[ k ].mui_Length << " ";
+	}
+	cout<<endl;
+
+    for ( h = nb*20; h < mui_NumberOfBlocks; h++ )
+    {
+        cout << preenchido[ h ]<<" ";
+	}
+	cout << endl << endl;
+
+    i = 0;
+    j = 0;
+    k = 0;
+    h = 0;
+    lk = 0;
+
+    lop = 0;
+    lop2;
+
+    cout << endl << "Free areas from block: ";
+
+    while ( aux3 != nullptr )
+    {
+        livre=aux3-&mp_Pool[0];
+        livre++;
+        cout<<livre<<" -> ";
+        aux3=aux3->mp_Next;
+    }
+    cout << "nullptr" << endl;
+
+    cout << endl << "**************************************************" << endl << endl;
     return;
+}
+
+/********************************************//**
+* Calculates the number o blank spaces to put
+* the underline sign
+* AUTHORS: José Carlos and Heraclito César
+***********************************************/
+int
+SLPool::Casas( int p )
+{
+    int i = 0;
+    int k = p;
+
+    while( k > 0 )
+    {
+        k = k / 10;
+        i++;
+    }
+
+    return i;
 }

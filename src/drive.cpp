@@ -42,31 +42,56 @@ void simpleTest( unsigned int n_instances, size_t bytes )
     /*! Instance of test class */
     SLPoolTester poolTest;
     string filename = "";
+    string filename2 = "";
 
     string out = "";
+    string out2 = "";
 
     /*! Running a simple test */
-    cout << endl << "----------------------------------------------" << endl;
-    cout << "<<< Sistema operacional (SO) >>>" << endl;
-    cout << "----------------------------------------------" << endl << endl;
+    out2 += "\n----------------------------------------------\n";
+    out2 += "<<< Sistema operacional (SO) >>>\n";
+    out2 += "----------------------------------------------\n\n";
 
     filename = "outSO" + std::to_string(bytes);
+    filename2 = "Output";
 
     for ( unsigned int i = 0; i < n_instances; i++ )
     {
         double count = poolTest.getTickCount();
+        SLPoolFF poolGM( bytes );
 
-            long *ptrSO1 = new long[5];
-            char *ptrSO2 = new char[2];
-            long long *ptrSO3 = new long long;
-            string *ptrSO4 = new string;
-            float *ptrSO5 = new float[25];
+            int *ptrSO1 = new int[5];
+            poolGM.Debug();
+
+            int *ptrSO2 = new int[2];
+            poolGM.Debug();
+
+            int *ptrSO3 = new int;
+            poolGM.Debug();
+
+            int *ptrSO4 = new int;
+            poolGM.Debug();
+
+            int *ptrSO5 = new int[25];
+            poolGM.Debug();
+
             delete ptrSO1;
+            poolGM.Debug();
+
             delete ptrSO2;
-            ptrSO2 = new char[8];
+            poolGM.Debug();
+
+            ptrSO2 = new int[8];
+            poolGM.Debug();
+
             delete ptrSO4;
-            ptrSO1 = new long[2];
-            ptrSO4 = new string;
+            poolGM.Debug();
+
+            ptrSO1 = new int[2];
+            poolGM.Debug();
+
+            ptrSO4 = new int;
+            poolGM.Debug();
 
         /*! Print the time */
         cout << "Interval SO = " << poolTest.getTickCount()-count << " ms" << endl;
@@ -77,12 +102,12 @@ void simpleTest( unsigned int n_instances, size_t bytes )
     /*! Save the time in the output file */
     saveFile(filename, out);
 
-    cout << endl << "----------------------------------------------" << endl;
+    out2 += "\n----------------------------------------------\n";
 
     /*! Running a simple test */
-    cout << endl << "----------------------------------------------" << endl;
-    cout << "<<< Gerenciador de memória (GM) - First Fit >>>" << endl;
-    cout << "----------------------------------------------" << endl << endl;
+    out2 += "\n----------------------------------------------\n";
+    out2 += "<<< Memory Manager (GM) - First Fit >>>\n";
+    out2 += "----------------------------------------------\n\n";
 
     filename = "outGMFF" + std::to_string(bytes);
 
@@ -91,41 +116,41 @@ void simpleTest( unsigned int n_instances, size_t bytes )
         double count2 = poolTest.getTickCount();    
         SLPoolFF poolGM( bytes );
 
-            long *ptrGM1 = new long[5];
-            //poolGM.Debug();
+            int *ptrGM1 = new int[5];
+            poolGM.Debug();
 
-            char *ptrGM2 = new char[2];
-            //poolGM.Debug();
+            int *ptrGM2 = new int[2];
+            poolGM.Debug();
 
-            long long *ptrGM3 = new long long;
-            //poolGM.Debug();
+            int *ptrGM3 = new int;
+            poolGM.Debug();
 
-            string *ptrGM4 = new string;
-            //poolGM.Debug();
+            int *ptrGM4 = new int;
+            poolGM.Debug();
 
-            float *ptrGM5 = new float[25];
-            //poolGM.Debug();
+            int *ptrGM5 = new int[25];
+            poolGM.Debug();
 
             delete ptrGM1;
-            //poolGM.Debug();
+            poolGM.Debug();
 
             delete ptrGM2;
-            //poolGM.Debug();
+            poolGM.Debug();
 
-            ptrGM2 = new char[8];
-            //poolGM.Debug();
+            ptrGM2 = new int[8];
+            poolGM.Debug();
 
             delete ptrGM4;
-            //poolGM.Debug();
+            poolGM.Debug();
 
-            ptrGM1 = new long[2];
-            //poolGM.Debug();
+            ptrGM1 = new int[2];
+            poolGM.Debug();
 
-            ptrGM4 = new string;
-            //poolGM.Debug();
+            ptrGM4 = new int;
+            poolGM.Debug();
 
         /*! Print the time */
-        cout << "Interval GM FF = " << poolTest.getTickCount()-count2 << " ms" << endl;
+        out2 += "Interval GM FF = " + std::to_string( (poolTest.getTickCount()-count2) ) + " ms\n";
 
         out += std::to_string( (poolTest.getTickCount()-count2) ) + '\n';
     }
@@ -133,12 +158,12 @@ void simpleTest( unsigned int n_instances, size_t bytes )
     /*! Save the time in the output file */
     saveFile(filename, out);
 
-    cout << endl << "----------------------------------------------" << endl;
+    out2 += "\n----------------------------------------------\n";
 
     /*! Running a simple test */
-    cout << endl << "----------------------------------------------" << endl;
-    cout << "<<< Gerenciador de memória (GM) - Best Fit >>>" << endl;
-    cout << "----------------------------------------------" << endl << endl;
+    out2 += "\n----------------------------------------------\n";
+    out2 += "<<< Memory Manager (GM) - Best Fit >>>\n";
+    out2 += "----------------------------------------------\n\n";
 
     filename = "outGMBF" + std::to_string(bytes);
 
@@ -147,41 +172,41 @@ void simpleTest( unsigned int n_instances, size_t bytes )
         double count2 = poolTest.getTickCount();    
         SLPoolBF poolGM( bytes );
 
-            long *ptrGM1 = new long[5];
-            //poolGM.Debug();
+            int *ptrGM1 = new int[5];
+            poolGM.Debug();
 
-            char *ptrGM2 = new char[2];
-            //poolGM.Debug();
+            int *ptrGM2 = new int[2];
+            poolGM.Debug();
 
-            long long *ptrGM3 = new long long;
-            //poolGM.Debug();
+            int *ptrGM3 = new int;
+            poolGM.Debug();
 
-            string *ptrGM4 = new string;
-            //poolGM.Debug();
+            int *ptrGM4 = new int;
+            poolGM.Debug();
 
-            float *ptrGM5 = new float[25];
-            //poolGM.Debug();
+            int *ptrGM5 = new int[25];
+            poolGM.Debug();
 
             delete ptrGM1;
-            //poolGM.Debug();
+            poolGM.Debug();
 
             delete ptrGM2;
-            //poolGM.Debug();
+            poolGM.Debug();
 
-            ptrGM2 = new char[8];
-            //poolGM.Debug();
+            ptrGM2 = new int[8];
+            poolGM.Debug();
 
             delete ptrGM4;
-            //poolGM.Debug();
+            poolGM.Debug();
 
-            ptrGM1 = new long[2];
-            //poolGM.Debug();
+            ptrGM1 = new int[2];
+            poolGM.Debug();
 
-            ptrGM4 = new string;
-            //poolGM.Debug();
+            ptrGM4 = new int;
+            poolGM.Debug();
 
         /*! Print the time */
-        cout << "Interval GM BF = " << poolTest.getTickCount()-count2 << " ms" << endl;
+        //cout << "Interval GM BF = " << poolTest.getTickCount()-count2 << " ms" << endl;
 
         out += std::to_string( (poolTest.getTickCount()-count2) ) + '\n';
     }
@@ -189,9 +214,12 @@ void simpleTest( unsigned int n_instances, size_t bytes )
     /*! Save the time in the output file */
     saveFile(filename, out);
 
-    cout << endl << "----------------------------------------------" << endl << endl;
+    out += "\n----------------------------------------------\n\n";
 
-    //return_to_menu();   
+    /*! Save the time in the output file */
+    saveFile(filename2, out2);
+
+    //return_to_menu();
 }
 
 /********************************************//**
@@ -199,11 +227,25 @@ void simpleTest( unsigned int n_instances, size_t bytes )
 ***********************************************/
 void advancedTest( time_t _time )
 {
+    cout << endl << "----------------------------------------------" << endl;
+    cout << "<<< Memory Manager (GM) - First Fit >>>" << endl;
+    cout << "----------------------------------------------" << endl << endl;
+
     /*! Instance from SLPoolTester */
     SLPoolTester poolTest;
     SLPoolFF poolGM( 256 );
     poolGM.Debug();
     poolTest.StoragePoolTest(poolGM, _time);
+
+    /*cout << endl << "----------------------------------------------" << endl;
+    cout << "<<< Memory Manager (GM) - Best Fit >>>" << endl;
+    cout << "----------------------------------------------" << endl << endl;*/
+
+    /*! Instance from SLPoolTester */
+    /*SLPoolTester poolTest2;
+    SLPoolBF poolGM2( 256 );
+    poolGM2.Debug();
+    poolTest2.StoragePoolTest(poolGM2, _time);*/
 
     return_to_menu();
 }
@@ -242,17 +284,17 @@ void menu()
         {
             /*! Simple test */
             case 1:
-                /*unsigned int n;
+                int n;
                 size_t memSize;
                 cout << endl << "Inform the number of instances: ";
                 cin >> n;
                 cout << endl << "Inform the allocation block in bytes: ";
                 cin >> memSize;
-                simpleTest(n, memSize);*/
+                //simpleTest(n, memSize);
 
-                for (auto i(1); i <= 20; ++i)
+                for ( auto i(1); i <= n; ++i )
                 {
-                    simpleTest(100, (50 * i));
+                    simpleTest(100, (memSize * i));
                 }
 
                 cout << endl << "<<< Output files generated with success >>> " << endl;
@@ -261,7 +303,7 @@ void menu()
             /*! Advanced test */
             case 2:
                 time_t time_test;
-                cout << endl << "Inform the time limit in seconds: ";
+                cout << endl << "Inform the time limit: ";
                 cin >> time_test;
                 advancedTest(time_test);
                 break;
@@ -299,6 +341,6 @@ int main( int argc, char const *argv[] )
 
     cout << "<<< Finish with success! >>>" << endl;
 
-	/*! Main return */
-	return 0;
+    /*! Main return */
+    return 0;
 }

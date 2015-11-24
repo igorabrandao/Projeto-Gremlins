@@ -83,6 +83,7 @@ class SLPool : public StoragePool
 		virtual void* Allocate( size_t ) = 0;
 		void Free( void * );
 		void Debug();
+		int Casas( int );
 
 	/*!
      * Protected section
