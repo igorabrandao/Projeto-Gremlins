@@ -35,6 +35,37 @@ void saveFile( string _filename, string _content )
 }
 
 /********************************************//**
+* Run a simple test of GM Best Fit
+***********************************************/
+void bfSimpleTest( size_t bytes )
+{
+    SLPoolBF poolGM( bytes );
+
+    int *ptrSO1 = new(poolGM) int[12];
+    poolGM.Debug();
+
+    int *ptrSO2 = new(poolGM) int[5];
+    poolGM.Debug();
+
+    int *ptrSO3 = new(poolGM) int[5];
+    poolGM.Debug();
+
+    int *ptrSO4 = new(poolGM) int[5];
+    poolGM.Debug();
+
+    delete ptrSO1;
+    poolGM.Debug();
+
+    delete ptrSO3;
+    poolGM.Debug();
+
+    int *ptrSO5 = new(poolGM) int[5];
+    poolGM.Debug();
+
+    return_to_menu();
+}
+
+/********************************************//**
 * Run a simple test of GM
 ***********************************************/
 void simpleTest( unsigned int n_instances, size_t bytes )
@@ -60,19 +91,19 @@ void simpleTest( unsigned int n_instances, size_t bytes )
         double count = poolTest.getTickCount();
         SLPoolFF poolGM( bytes );
 
-            int *ptrSO1 = new int[5];
+            int *ptrSO1 = new(poolGM) int[5];
             poolGM.Debug();
 
-            int *ptrSO2 = new int[2];
+            int *ptrSO2 = new(poolGM) int[2];
             poolGM.Debug();
 
-            int *ptrSO3 = new int;
+            int *ptrSO3 = new(poolGM) int;
             poolGM.Debug();
 
-            int *ptrSO4 = new int;
+            int *ptrSO4 = new(poolGM) int;
             poolGM.Debug();
 
-            int *ptrSO5 = new int[25];
+            int *ptrSO5 = new(poolGM) int[25];
             poolGM.Debug();
 
             delete ptrSO1;
@@ -81,16 +112,16 @@ void simpleTest( unsigned int n_instances, size_t bytes )
             delete ptrSO2;
             poolGM.Debug();
 
-            ptrSO2 = new int[8];
+            ptrSO2 = new(poolGM) int[8];
             poolGM.Debug();
 
             delete ptrSO4;
             poolGM.Debug();
 
-            ptrSO1 = new int[2];
+            ptrSO1 = new(poolGM) int[2];
             poolGM.Debug();
 
-            ptrSO4 = new int;
+            ptrSO4 = new(poolGM) int;
             poolGM.Debug();
 
         /*! Print the time */
@@ -114,40 +145,40 @@ void simpleTest( unsigned int n_instances, size_t bytes )
     for ( unsigned int i = 0; i < n_instances; i++ )
     {
         double count2 = poolTest.getTickCount();    
-        SLPoolFF poolGM( bytes );
+        SLPoolFF poolGM2( bytes );
 
-            int *ptrGM1 = new int[5];
-            poolGM.Debug();
+            int *ptrGM1 = new(poolGM2) int[5];
+            poolGM2.Debug();
 
-            int *ptrGM2 = new int[2];
-            poolGM.Debug();
+            int *ptrGM2 = new(poolGM2) int[2];
+            poolGM2.Debug();
 
-            int *ptrGM3 = new int;
-            poolGM.Debug();
+            int *ptrGM3 = new(poolGM2) int;
+            poolGM2.Debug();
 
-            int *ptrGM4 = new int;
-            poolGM.Debug();
+            int *ptrGM4 = new(poolGM2) int;
+            poolGM2.Debug();
 
-            int *ptrGM5 = new int[25];
-            poolGM.Debug();
+            int *ptrGM5 = new(poolGM2) int[25];
+            poolGM2.Debug();
 
             delete ptrGM1;
-            poolGM.Debug();
+            poolGM2.Debug();
 
             delete ptrGM2;
-            poolGM.Debug();
+            poolGM2.Debug();
 
-            ptrGM2 = new int[8];
-            poolGM.Debug();
+            ptrGM2 = new(poolGM2) int[8];
+            poolGM2.Debug();
 
             delete ptrGM4;
-            poolGM.Debug();
+            poolGM2.Debug();
 
-            ptrGM1 = new int[2];
-            poolGM.Debug();
+            ptrGM1 = new(poolGM2) int[2];
+            poolGM2.Debug();
 
-            ptrGM4 = new int;
-            poolGM.Debug();
+            ptrGM4 = new(poolGM2) int;
+            poolGM2.Debug();
 
         /*! Print the time */
         out2 += "Interval GM FF = " + std::to_string( (poolTest.getTickCount()-count2) ) + " ms\n";
@@ -170,40 +201,40 @@ void simpleTest( unsigned int n_instances, size_t bytes )
     for ( unsigned int i = 0; i < n_instances; i++ )
     {
         double count2 = poolTest.getTickCount();    
-        SLPoolBF poolGM( bytes );
+        SLPoolBF poolGM3( bytes );
 
-            int *ptrGM1 = new int[5];
-            poolGM.Debug();
+            int *ptrGM1 = new(poolGM3) int[5];
+            poolGM3.Debug();
 
-            int *ptrGM2 = new int[2];
-            poolGM.Debug();
+            int *ptrGM2 = new(poolGM3) int[2];
+            poolGM3.Debug();
 
-            int *ptrGM3 = new int;
-            poolGM.Debug();
+            int *ptrGM3 = new(poolGM3) int;
+            poolGM3.Debug();
 
-            int *ptrGM4 = new int;
-            poolGM.Debug();
+            int *ptrGM4 = new(poolGM3) int;
+            poolGM3.Debug();
 
-            int *ptrGM5 = new int[25];
-            poolGM.Debug();
+            int *ptrGM5 = new(poolGM3) int[25];
+            poolGM3.Debug();
 
             delete ptrGM1;
-            poolGM.Debug();
+            poolGM3.Debug();
 
             delete ptrGM2;
-            poolGM.Debug();
+            poolGM3.Debug();
 
-            ptrGM2 = new int[8];
-            poolGM.Debug();
+            ptrGM2 = new(poolGM3) int[8];
+            poolGM3.Debug();
 
             delete ptrGM4;
-            poolGM.Debug();
+            poolGM3.Debug();
 
-            ptrGM1 = new int[2];
-            poolGM.Debug();
+            ptrGM1 = new(poolGM3) int[2];
+            poolGM3.Debug();
 
-            ptrGM4 = new int;
-            poolGM.Debug();
+            ptrGM4 = new(poolGM3) int;
+            poolGM3.Debug();
 
         /*! Print the time */
         //cout << "Interval GM BF = " << poolTest.getTickCount()-count2 << " ms" << endl;
@@ -266,14 +297,15 @@ void menu()
     cout << "Choose and option below: " << endl << endl;
     cout << "1) Simple test " << endl;
     cout << "2) Automatic test " << endl;
-    cout << "3) Exit " << endl << endl;
+    cout << "3) Best Fit simple test " << endl;
+    cout << "4) Exit " << endl << endl;
     cout << "----------------------------------------------" << endl << endl;    
 
     cout << "Inform the menu option: ";
     cin >> op;
 
     /*! Check if the option is valid */
-    if ( op < 0 || op > 3 )
+    if ( op < 0 || op > 4 )
     {
         menu(); //!< invalid option
     }
@@ -306,6 +338,13 @@ void menu()
                 cout << endl << "Inform the time limit: ";
                 cin >> time_test;
                 advancedTest(time_test);
+                break;
+
+             /*! Advanced test */
+            case 3:
+                cout << endl << "Inform the allocation block in bytes: ";
+                cin >> memSize;
+                bfSimpleTest(memSize);
                 break;
 
             /*! Exit */
